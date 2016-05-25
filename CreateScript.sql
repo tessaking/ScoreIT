@@ -1,10 +1,3 @@
-CREATE TABLE Judge (
-  judgeID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  fname TEXT NULL,
-  lname TEXT NULL,
-  PRIMARY KEY(judgeID)
-);
-
 CREATE TABLE Member (
   memberID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   Team_teamID INTEGER UNSIGNED NOT NULL,
@@ -20,6 +13,15 @@ CREATE TABLE Question (
   PRIMARY KEY(questionID)
 );
 
+CREATE TABLE SysUser (
+  sysUserID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  fname TEXT NULL,
+  lname TEXT NULL,
+  userType INTEGER UNSIGNED NULL,
+  pword TEXT NULL,
+  PRIMARY KEY(sysUserID)
+);
+
 CREATE TABLE Team (
   teamID INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   teamName TEXT NULL,
@@ -29,12 +31,12 @@ CREATE TABLE Team (
 
 CREATE TABLE TeamScore (
   Team_teamID INTEGER UNSIGNED NOT NULL,
-  Judge_judgeID INTEGER UNSIGNED NOT NULL,
   Question_questionID INTEGER UNSIGNED NOT NULL,
+  SysUser_sysUserID INTEGER UNSIGNED NOT NULL,
   score INTEGER UNSIGNED NULL,
-  PRIMARY KEY(Team_teamID, Judge_judgeID, Question_questionID),
+  PRIMARY KEY(Team_teamID, Question_questionID, SysUser_sysUserID),
   INDEX TeamScore_FKIndex1(Team_teamID),
-  INDEX TeamScore_FKIndex2(Judge_judgeID),
+  INDEX TeamScore_FKIndex2(SysUser_sysUserID),
   INDEX TeamScore_FKIndex3(Question_questionID)
 );
 
